@@ -1,0 +1,173 @@
+source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
+ruby '3.0.2'
+
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
+gem 'rails', '~> 7.0.3', '>= 7.0.3.1'
+# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
+gem 'sprockets-rails'
+# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
+gem 'importmap-rails'
+
+gem 'pg'
+gem 'redis'
+
+gem 'strong_migrations'
+
+# background worker and mailer
+gem 'sidekiq'
+gem 'sinatra', require: nil # sidekiq monitor
+
+# Uploading images and CSV reports to s3
+gem 'aws-sdk-s3'
+
+# Use the slim templating system
+gem 'slim-rails', require: false
+
+gem 'progress_bar'
+
+# Security related gems
+gem 'rails-html-sanitizer'
+gem 'csv-safe'
+
+# View dependencies
+gem 'nokogiri'
+gem 'will_paginate'
+gem 'wicked_pdf'
+
+# I18n gems
+gem 'rails-i18n'
+gem 'money-rails'
+gem 'money-historical-bank'
+gem 'money-open-exchange-rates'
+gem 'countries'
+gem 'country_select'
+
+# Session authentication
+gem 'authlogic'
+
+# the authlogic gem no longer depends on the scrypt gem
+# To keep using it as Authlogic crypto_provider
+# it needs to be added explicitly
+gem 'scrypt'
+
+# API
+gem 'bcrypt'    # authentication
+gem 'jbuilder'  # Read more: https://github.com/rails/jbuilder
+
+# payment gateways
+gem 'stripe'
+gem 'plaid'
+gem 'oauth2'    # app/controllers/concerns/stripe_connect.rb
+gem 'paypal-checkout-sdk'
+gem 'paypalhttp', path: 'vendor/gems/paypalhttp-1.0.1'
+
+# Asset Pipeline
+gem 'sass-rails'       # Use SCSS for stylesheets
+gem "terser", "~> 1.1" # Compressor for JavaScript assets
+
+gem 'jquery-rails'
+gem 'foundation-rails', '5.4.5.0'
+gem 'foundation-icons-sass-rails'
+gem 'font-awesome-rails', '~> 4.7'
+gem 'filestack-rails'
+gem 'recaptcha'
+
+gem 'puma'
+
+# to redirect www trafic to naked domain
+gem 'rack-rewrite'
+
+# Blog integration
+# rack-reverse-proxy helps put a 3rd party blog in a sub dir.
+# https://medium.com/@parterburn/wordpress-inside-a-ruby-on-rails-app-c324fbf39ad8
+gem 'rack-reverse-proxy', require: 'rack/reverse_proxy'
+
+# for throttling abusive requests and ban IPs
+gem 'rack-attack'
+
+# External Services
+gem 'restforce'                     # Salesforce Integration
+gem 'appsignal'                     # error notifications
+gem 'geoip', '~> 1.6.3'             # get country by ip
+
+# Utility gems
+gem 'useragent', '~> 0.16.8'        # parse user agent
+gem 'rgb', '~> 0.1.0'
+gem 'paranoia', '~> 2.1', '>= 2.1.5'
+gem 'paper_trail'
+gem 'paper_trail-globalid'
+gem 'email_inquire'
+
+# QR Code Generation
+gem 'rqrcode', '~> 2.0'
+#2FA
+gem 'active_model_otp'
+gem 'rack-cors', :require => 'rack/cors'
+
+group :development do
+  # Access an interactive console on exception pages
+  # or by calling 'console' anywhere in the code.
+  gem 'web-console', '>= 4.1.0'
+
+  # Display performance information such as SQL time
+  # and flame graphs for each request in your browser.
+  # Can be configured to work on production as well see:
+  # https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
+  gem 'rack-mini-profiler', '~> 2.0'
+
+  gem 'listen', '~> 3.3'
+
+  # Spring speeds up development by keeping your application running
+  # in the background. Read more: https://github.com/rails/spring
+  # gem 'spring'
+end
+
+gem 'letter_opener'
+
+#### Testing suite https://mattbrictson.com/minitest-and-rails
+group :development, :test do
+  gem 'byebug'
+  gem 'dotenv-rails'
+
+  # Add spec DSL support (describe/let/it) to Minitest
+  gem 'minitest-rails'
+  gem 'wkhtmltopdf-binary'
+end
+
+group :test do
+  gem 'webmock'
+  gem 'vcr'
+  gem 'simplecov'
+
+  # Adds support for Capybara system testing and selenium driver
+  gem 'capybara', '>= 3.26'
+
+  gem 'selenium-webdriver'
+  # # Easy installation and use of chromedriver to run system tests with Chrome
+  gem 'webdrivers'
+end
+
+group :production do
+  # Generates a stacktraces on timeouts:
+  # https://devcenter.heroku.com/articles/rails-unicorn#rack-timeout
+  gem 'rack-timeout', require:"rack/timeout/base"
+
+  # Instrumentation for Ruby metrics
+  # https://devcenter.heroku.com/articles/language-runtime-metrics-ruby#add-the-barnes-gem-to-your-application
+  gem 'barnes'
+
+
+  # Reliable and size-efficient way of rendering PDFs in Heroku
+  # https://razorjack.net/wkhtmltopdf-on-heroku-evaluating-different-installation-options/
+  gem 'wkhtmltopdf-heroku', '2.12.6'
+
+
+  # Application Security Management Platform | Sqreen
+  # https://www.sqreen.com/
+  gem 'sqreen', '>= 1.21', require: 'sqreen'
+  gem 'rack-headers_filter'
+end
+
+gem "stimulus-rails", "~> 1.0"
